@@ -71,4 +71,8 @@ install(DIRECTORY
   DESTINATION lib/${PROJECT_NAME}
 )
 
+install(DIRECTORY launch param
+  DESTINATION share/${PROJECT_NAME}
+)
+
 ament_package()

@@ -44,7 +44,9 @@ CamPublisher_::~CamPublisher_()
 
 void CamPublisher_::initialize()
 {
-  auto qos = rclcpp::QoS(rclcpp::KeepLast(10));
+  this->declare_parameter("qos_depth", 10);
+  int8_t qos_depth = this->get_parameter("qos_depth").get_value<int8_t>();
+  auto qos = rclcpp::QoS(rclcpp::KeepLast(qos_depth));
   pub_ = this->create_publisher<sensor_msgs::msg::Image>(
       "/camera/mat2image_image2mat", qos);
 

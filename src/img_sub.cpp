@@ -27,7 +27,9 @@ CamSubscriber_::~CamSubscriber_()
 //functions
 void CamSubscriber_::initialize()
 {
-  auto qos = rclcpp::QoS(rclcpp::KeepLast(10));
+  this->declare_parameter("qos_depth", 10);
+  int8_t qos_depth = this->get_parameter("qos_depth").get_value<int8_t>();
+  auto qos = rclcpp::QoS(rclcpp::KeepLast(qos_depth));
   auto callback =
     [this](const sensor_msgs::msg::Image::SharedPtr msg) {
       process_image(msg);
